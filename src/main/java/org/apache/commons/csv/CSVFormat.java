@@ -2133,7 +2133,7 @@ public final class CSVFormat implements Serializable {
         while (pos < end) {
             char c = charSeq.charAt(pos);
             final boolean isDelimiterStart = isDelimiter(c, charSeq, pos, delim, delimLength);
-            if (c == CR || c == LF || c == escape || isDelimiterStart) {
+            if (isCRLFEscape(c) || isDelimiterStart) {
                 // write out segment up until this char
                 if (pos > start) {
                     appendable.append(charSeq, start, pos);
@@ -2148,12 +2148,7 @@ public final class CSVFormat implements Serializable {
                 appendable.append(c);
 
                 if (isDelimiterStart) {
-                    for (int i = 1; i < delimLength; i++) {
-                        pos++;
-                        c = charSeq.charAt(pos);
-                        appendable.append(escape);
-                        appendable.append(c);
-                    }
+                    pos = appendUntilDelimiter(delimLength, pos, charSeq, appendable);
                 }
 
                 start = pos + 1; // start on the current char after this one
@@ -2165,6 +2160,23 @@ public final class CSVFormat implements Serializable {
         if (pos > start) {
             appendable.append(charSeq, start, pos);
         }
+    }
+
+    private int appendUntilDelimiter(int delimLength, int pos, CharSequence charSeq, Appendable appendable) throws IOException {
+        final char escape = getEscapeCharacter().charValue();
+
+        for (int i = 1; i < delimLength; i++) {
+            pos++;
+            char c = charSeq.charAt(pos);
+            appendable.append(escape);
+            appendable.append(c);
+        }
+
+        return pos;
+    }
+
+    private boolean isCRLFEscape(char c) {
+        return c == CR || c == LF || c == getEscapeCharacter().charValue();
     }
 
     private void printWithEscapes(final Reader reader, final Appendable appendable) throws IOException {
