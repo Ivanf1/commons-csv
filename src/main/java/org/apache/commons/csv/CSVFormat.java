@@ -2189,10 +2189,6 @@ public final class CSVFormat implements Serializable {
     private boolean isCRLFEscape(char c) {
         return c == CR || c == LF || c == getEscapeCharacter().charValue();
     }
-    // private boolean isCRLFEscape(int x) {
-    //     char c = (char) x;
-    //     return c == CR || c == LF || c == getEscapeCharacter().charValue();
-    // }
 
     private void printWithEscapes(final Reader reader, final Appendable appendable) throws IOException {
         int start = 0;
@@ -2476,11 +2472,11 @@ public final class CSVFormat implements Serializable {
             throw new IllegalArgumentException("The comment start character and the delimiter cannot be the same ('" + commentMarker + "')");
         }
 
-        if (areCommentStartCharAndQuoteCharEqual(commentMarker, delimiter)) {
+        if (areCommentStartCharAndQuoteCharEqual(quoteCharacter, commentMarker)) {
             throw new IllegalArgumentException("The comment start character and the quoteChar cannot be the same ('" + commentMarker + "')");
         }
 
-        if (areCommentStartCharAndEscapeCharEqual(commentMarker, delimiter)) {
+        if (areCommentStartCharAndEscapeCharEqual(escapeCharacter, commentMarker)) {
             throw new IllegalArgumentException("The comment start and the escape character cannot be the same ('" + commentMarker + "')");
         }
 
@@ -2518,11 +2514,11 @@ public final class CSVFormat implements Serializable {
         return commentMarker != null && contains(delimiter, commentMarker.charValue());
     }
 
-    private boolean areCommentStartCharAndQuoteCharEqual(Character commentMarker, String delimiter) {
+    private boolean areCommentStartCharAndQuoteCharEqual(Character quoteCharacter, Character commentMarker) {
         return quoteCharacter != null && quoteCharacter.equals(commentMarker);
     }
 
-    private boolean areCommentStartCharAndEscapeCharEqual(Character commentMarker, String delimiter) {
+    private boolean areCommentStartCharAndEscapeCharEqual(Character escapeCharacter, Character commentMarker) {
         return escapeCharacter != null && escapeCharacter.equals(commentMarker);
     }
 
