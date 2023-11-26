@@ -2464,27 +2464,27 @@ public final class CSVFormat implements Serializable {
             throw new IllegalArgumentException("The delimiter cannot be a line break");
         }
 
-        if (quoteCharacter != null && contains(delimiter, quoteCharacter.charValue())) {
+        if (areQuoteCharAndDelimiterEqual(quoteCharacter, delimiter)) {
             throw new IllegalArgumentException("The quoteChar character and the delimiter cannot be the same ('" + quoteCharacter + "')");
         }
 
-        if (escapeCharacter != null && contains(delimiter, escapeCharacter.charValue())) {
+        if (areEscapeCharAndDelimiterEqual(escapeCharacter, delimiter)) {
             throw new IllegalArgumentException("The escape character and the delimiter cannot be the same ('" + escapeCharacter + "')");
         }
 
-        if (commentMarker != null && contains(delimiter, commentMarker.charValue())) {
+        if (areCommentStartCharAndDelimiterEqual(commentMarker, delimiter)) {
             throw new IllegalArgumentException("The comment start character and the delimiter cannot be the same ('" + commentMarker + "')");
         }
 
-        if (quoteCharacter != null && quoteCharacter.equals(commentMarker)) {
+        if (areCommentStartCharAndQuoteCharEqual(commentMarker, delimiter)) {
             throw new IllegalArgumentException("The comment start character and the quoteChar cannot be the same ('" + commentMarker + "')");
         }
 
-        if (escapeCharacter != null && escapeCharacter.equals(commentMarker)) {
+        if (areCommentStartCharAndEscapeCharEqual(commentMarker, delimiter)) {
             throw new IllegalArgumentException("The comment start and the escape character cannot be the same ('" + commentMarker + "')");
         }
 
-        if (escapeCharacter == null && quoteMode == QuoteMode.NONE) {
+        if (isEscapeCharSetForQuoteModeNone(escapeCharacter, quoteMode)) {
             throw new IllegalArgumentException("Quote mode set to NONE but no escape character is set");
         }
 
@@ -2506,6 +2506,29 @@ public final class CSVFormat implements Serializable {
         }
     }
 
+    private boolean areQuoteCharAndDelimiterEqual(Character quoteCharacter, String delimiter) {
+        return quoteCharacter != null && contains(delimiter, quoteCharacter.charValue());
+    }
+
+    private boolean areEscapeCharAndDelimiterEqual(Character escapeCharacter, String delimiter) {
+        return escapeCharacter != null && contains(delimiter, escapeCharacter.charValue());
+    }
+
+    private boolean areCommentStartCharAndDelimiterEqual(Character commentMarker, String delimiter) {
+        return commentMarker != null && contains(delimiter, commentMarker.charValue());
+    }
+
+    private boolean areCommentStartCharAndQuoteCharEqual(Character commentMarker, String delimiter) {
+        return quoteCharacter != null && quoteCharacter.equals(commentMarker);
+    }
+
+    private boolean areCommentStartCharAndEscapeCharEqual(Character commentMarker, String delimiter) {
+        return escapeCharacter != null && escapeCharacter.equals(commentMarker);
+    }
+
+    private boolean isEscapeCharSetForQuoteModeNone(Character escapeCharacter, QuoteMode quoteMode) {
+        return escapeCharacter == null && quoteMode == QuoteMode.NONE;
+    }
     /**
      * Builds a new {@code CSVFormat} that allows duplicate header names.
      *
