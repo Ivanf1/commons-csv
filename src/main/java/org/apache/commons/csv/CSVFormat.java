@@ -2485,21 +2485,7 @@ public final class CSVFormat implements Serializable {
         }
 
         // Validate headers
-        if (headers != null && duplicateHeaderMode != DuplicateHeaderMode.ALLOW_ALL) {
-            final Set<String> dupCheckSet = new HashSet<>(headers.length);
-            final boolean emptyDuplicatesAllowed = duplicateHeaderMode == DuplicateHeaderMode.ALLOW_EMPTY;
-            for (final String header : headers) {
-                final boolean blank = isBlank(header);
-                // Sanitise all empty headers to the empty string "" when checking duplicates
-                final boolean containsHeader = !dupCheckSet.add(blank ? "" : header);
-                if (containsHeader && !(blank && emptyDuplicatesAllowed)) {
-                    throw new IllegalArgumentException(
-                        String.format(
-                            "The header contains a duplicate name: \"%s\" in %s. If this is valid then use CSVFormat.Builder.setDuplicateHeaderMode().",
-                            header, Arrays.toString(headers)));
-                }
-            }
-        }
+        validateHeaders();
     }
 
     private boolean areQuoteCharAndDelimiterEqual(Character quoteCharacter, String delimiter) {
@@ -2524,6 +2510,24 @@ public final class CSVFormat implements Serializable {
 
     private boolean isEscapeCharSetForQuoteModeNone(Character escapeCharacter, QuoteMode quoteMode) {
         return escapeCharacter == null && quoteMode == QuoteMode.NONE;
+    }
+
+    private void validateHeaders() throws IllegalArgumentException {
+        if (headers != null && duplicateHeaderMode != DuplicateHeaderMode.ALLOW_ALL) {
+            final Set<String> dupCheckSet = new HashSet<>(headers.length);
+            final boolean emptyDuplicatesAllowed = duplicateHeaderMode == DuplicateHeaderMode.ALLOW_EMPTY;
+            for (final String header : headers) {
+                final boolean blank = isBlank(header);
+                // Sanitise all empty headers to the empty string "" when checking duplicates
+                final boolean containsHeader = !dupCheckSet.add(blank ? "" : header);
+                if (containsHeader && !(blank && emptyDuplicatesAllowed)) {
+                    throw new IllegalArgumentException(
+                        String.format(
+                            "The header contains a duplicate name: \"%s\" in %s. If this is valid then use CSVFormat.Builder.setDuplicateHeaderMode().",
+                            header, Arrays.toString(headers)));
+                }
+            }
+        }
     }
     /**
      * Builds a new {@code CSVFormat} that allows duplicate header names.
