@@ -142,14 +142,14 @@ import org.apache.commons.io.function.Uncheck;
  */
 public final class CSVParser implements Iterable<CSVRecord>, Closeable {
 
-    private final static String kFILE = "file";
-    private final static String kINPUT_STREAM = "inputStream";
-    private final static String kFORMAT = "format";
-    private final static String kPATH = "path";
-    private final static String kSTRING = "string";
-    private final static String kURL = "url";
-    private final static String kCHARSET = "charset";
-    private final static String kREADER = "reader";
+    private final static String KFILE = "file";
+    private final static String KINPUT_STREAM = "inputStream";
+    private final static String KFORMAT = "format";
+    private final static String KPATH = "path";
+    private final static String KSTRING = "string";
+    private final static String KURL = "url";
+    private final static String KCHARSET = "charset";
+    private final static String KREADER = "reader";
 
 
     final class CSVRecordIterator implements Iterator<CSVRecord> {
@@ -233,7 +233,7 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      *             If an I/O error occurs
      */
     public static CSVParser parse(final File file, final Charset charset, final CSVFormat format) throws IOException {
-        Objects.requireNonNull(file, kFILE);
+        Objects.requireNonNull(file, KFILE);
         return parse(file.toPath(), charset, format);
     }
 
@@ -261,8 +261,8 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
     @SuppressWarnings("resource")
     public static CSVParser parse(final InputStream inputStream, final Charset charset, final CSVFormat format)
             throws IOException {
-        Objects.requireNonNull(inputStream, kINPUT_STREAM);
-        Objects.requireNonNull(format, kFORMAT);
+        Objects.requireNonNull(inputStream, KINPUT_STREAM);
+        Objects.requireNonNull(format, KFORMAT);
         return parse(new InputStreamReader(inputStream, charset), format);
     }
 
@@ -284,8 +284,8 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      */
     @SuppressWarnings("resource")
     public static CSVParser parse(final Path path, final Charset charset, final CSVFormat format) throws IOException {
-        Objects.requireNonNull(path, kPATH);
-        Objects.requireNonNull(format, kFORMAT);
+        Objects.requireNonNull(path, KPATH);
+        Objects.requireNonNull(format, KFORMAT);
         return parse(Files.newInputStream(path), charset, format);
     }
 
@@ -326,8 +326,8 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      *             If an I/O error occurs
      */
     public static CSVParser parse(final String string, final CSVFormat format) throws IOException {
-        Objects.requireNonNull(string, kSTRING);
-        Objects.requireNonNull(format, kFORMAT);
+        Objects.requireNonNull(string, KSTRING);
+        Objects.requireNonNull(format, KFORMAT);
 
         return new CSVParser(new StringReader(string), format);
     }
@@ -354,9 +354,9 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      */
     @SuppressWarnings("resource")
     public static CSVParser parse(final URL url, final Charset charset, final CSVFormat format) throws IOException {
-        Objects.requireNonNull(url, kURL);
-        Objects.requireNonNull(charset, kCHARSET);
-        Objects.requireNonNull(format, kFORMAT);
+        Objects.requireNonNull(url, KURL);
+        Objects.requireNonNull(charset, KCHARSET);
+        Objects.requireNonNull(format, KFORMAT);
 
         return new CSVParser(new InputStreamReader(url.openStream(), charset), format);
     }
@@ -435,8 +435,8 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
     @SuppressWarnings("resource")
     public CSVParser(final Reader reader, final CSVFormat format, final long characterOffset, final long recordNumber)
         throws IOException {
-        Objects.requireNonNull(reader, kREADER);
-        Objects.requireNonNull(format, kFORMAT);
+        Objects.requireNonNull(reader, KREADER);
+        Objects.requireNonNull(format, KFORMAT);
 
         this.format = format.copy();
         this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
