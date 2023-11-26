@@ -142,14 +142,14 @@ import org.apache.commons.io.function.Uncheck;
  */
 public final class CSVParser implements Iterable<CSVRecord>, Closeable {
 
-    private final static String KFILE = "file";
-    private final static String KINPUT_STREAM = "inputStream";
-    private final static String KFORMAT = "format";
-    private final static String KPATH = "path";
-    private final static String KSTRING = "string";
-    private final static String KURL = "url";
-    private final static String KCHARSET = "charset";
-    private final static String KREADER = "reader";
+    private static final String KFILE = "file";
+    private static final String KINPUT_STREAM = "inputStream";
+    private static final String KFORMAT = "format";
+    private static final String KPATH = "path";
+    private static final String KSTRING = "string";
+    private static final String KURL = "url";
+    private static final String KCHARSET = "charset";
+    private static final String KREADER = "reader";
 
 
     final class CSVRecordIterator implements Iterator<CSVRecord> {
