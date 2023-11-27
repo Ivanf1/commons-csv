@@ -41,7 +41,7 @@ import org.junit.jupiter.api.Test;
  * Jira CSV-253 to a certain extent.
  * </p>
  */
-public class JiraCsv93Test {
+ class JiraCsv93Test {
     private static Object[] objects1 = {"abc", "", null, "a,b,c", 123};
 
     private static Object[] objects2 = {"abc", "NULL", null, "a,b,c", 123};
@@ -59,7 +59,7 @@ public class JiraCsv93Test {
     }
 
     @Test
-    public void testWithNotSetNullString() throws IOException {
+     void testWithNotSetNullString() throws IOException {
         // @formatter:off
         every(CSVFormat.DEFAULT,
                 objects1,
@@ -89,7 +89,7 @@ public class JiraCsv93Test {
     }
 
     @Test
-    public void testWithSetNullStringEmptyString() throws IOException {
+     void testWithSetNullStringEmptyString() throws IOException {
         // @formatter:off
         every(CSVFormat.DEFAULT.builder().setNullString("").build(),
                 objects1,
@@ -119,7 +119,7 @@ public class JiraCsv93Test {
     }
 
     @Test
-    public void testWithSetNullStringNULL() throws IOException {
+     void testWithSetNullStringNULL() throws IOException {
         // @formatter:off
         every(CSVFormat.DEFAULT.builder().setNullString("NULL").build(),
                 objects2,

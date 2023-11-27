@@ -22,10 +22,10 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.QuoteMode;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv148Test {
+ class JiraCsv148Test {
 
     @Test
-    public void testWithIgnoreSurroundingSpacesEmpty() {
+     void testWithIgnoreSurroundingSpacesEmpty() {
         // @formatter:off
         final CSVFormat format = CSVFormat.DEFAULT.builder()
             .setQuoteMode(QuoteMode.ALL)
@@ -47,7 +47,7 @@ public class JiraCsv148Test {
      * you can remove the leading and trailing spaces, tabs and other symbols.
      */
     @Test
-    public void testWithTrimEmpty() {
+     void testWithTrimEmpty() {
         // @formatter:off
         final CSVFormat format = CSVFormat.DEFAULT.builder()
             .setQuoteMode(QuoteMode.ALL)

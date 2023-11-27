@@ -29,7 +29,7 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv288Test {
+ class JiraCsv288Test {
 
     private void print(final CSVRecord csvRecord, final CSVPrinter csvPrinter) throws IOException {
         for (final String value : csvRecord) {
@@ -40,7 +40,7 @@ public class JiraCsv288Test {
     @Test
     // Before fix:
     // expected: <a,b,c,d,,f> but was: <a,b,c,d,|f>
-    public void testParseWithABADelimiter() throws Exception {
+     void testParseWithABADelimiter() throws Exception {
         final Reader in = new StringReader("a|~|b|~|c|~|d|~||~|f");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -55,7 +55,7 @@ public class JiraCsv288Test {
     @Test
     // Before fix:
     // expected: <a,b,c,d,,f> but was: <a,b|c,d,|f>
-    public void testParseWithDoublePipeDelimiter() throws Exception {
+     void testParseWithDoublePipeDelimiter() throws Exception {
         final Reader in = new StringReader("a||b||c||d||||f");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -70,7 +70,7 @@ public class JiraCsv288Test {
     @Test
     // Regression, already passed before fix
 
-    public void testParseWithDoublePipeDelimiterDoubleCharValue() throws Exception {
+     void testParseWithDoublePipeDelimiterDoubleCharValue() throws Exception {
         final Reader in = new StringReader("a||bb||cc||dd||f");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -85,7 +85,7 @@ public class JiraCsv288Test {
     @Test
     // Before fix:
     // expected: <a,b,c,d,,f,> but was: <a,b|c,d,|f>
-    public void testParseWithDoublePipeDelimiterEndsWithDelimiter() throws Exception {
+     void testParseWithDoublePipeDelimiterEndsWithDelimiter() throws Exception {
         final Reader in = new StringReader("a||b||c||d||||f||");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -100,7 +100,7 @@ public class JiraCsv288Test {
     @Test
     // Before fix:
     // expected: <a,b||c,d,,f> but was: <a,b||c,d,|f>
-    public void testParseWithDoublePipeDelimiterQuoted() throws Exception {
+     void testParseWithDoublePipeDelimiterQuoted() throws Exception {
         final Reader in = new StringReader("a||\"b||c\"||d||||f");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -114,7 +114,7 @@ public class JiraCsv288Test {
 
     @Test
     // Regression, already passed before fix
-    public void testParseWithSinglePipeDelimiterEndsWithDelimiter() throws Exception {
+     void testParseWithSinglePipeDelimiterEndsWithDelimiter() throws Exception {
         final Reader in = new StringReader("a|b|c|d||f|");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -129,7 +129,7 @@ public class JiraCsv288Test {
     @Test
     // Before fix:
     // expected: <a,b,c,d,,f> but was: <a,b|c,d,|f>
-    public void testParseWithTriplePipeDelimiter() throws Exception {
+     void testParseWithTriplePipeDelimiter() throws Exception {
         final Reader in = new StringReader("a|||b|||c|||d||||||f");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -143,7 +143,7 @@ public class JiraCsv288Test {
 
     @Test
     // Regression, already passed before fix
-    public void testParseWithTwoCharDelimiter1() throws Exception {
+     void testParseWithTwoCharDelimiter1() throws Exception {
         final Reader in = new StringReader("a~|b~|c~|d~|~|f");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -157,7 +157,7 @@ public class JiraCsv288Test {
 
     @Test
     // Regression, already passed before fix
-    public void testParseWithTwoCharDelimiter2() throws Exception {
+     void testParseWithTwoCharDelimiter2() throws Exception {
         final Reader in = new StringReader("a~|b~|c~|d~|~|f~");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -171,7 +171,7 @@ public class JiraCsv288Test {
 
     @Test
     // Regression, already passed before fix
-    public void testParseWithTwoCharDelimiter3() throws Exception {
+     void testParseWithTwoCharDelimiter3() throws Exception {
         final Reader in = new StringReader("a~|b~|c~|d~|~|f|");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -185,7 +185,7 @@ public class JiraCsv288Test {
 
     @Test
     // Regression, already passed before fix
-    public void testParseWithTwoCharDelimiter4() throws Exception {
+     void testParseWithTwoCharDelimiter4() throws Exception {
         final Reader in = new StringReader("a~|b~|c~|d~|~|f~~||g");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);
@@ -200,7 +200,7 @@ public class JiraCsv288Test {
     @Test
     // Before fix:
     // expected: <a,b,c,d,,f,> but was: <a,b,c,d,,f>
-    public void testParseWithTwoCharDelimiterEndsWithDelimiter() throws Exception {
+     void testParseWithTwoCharDelimiterEndsWithDelimiter() throws Exception {
         final Reader in = new StringReader("a~|b~|c~|d~|~|f~|");
         final StringBuilder stringBuilder = new StringBuilder();
         try (CSVPrinter csvPrinter = new CSVPrinter(stringBuilder, CSVFormat.EXCEL);

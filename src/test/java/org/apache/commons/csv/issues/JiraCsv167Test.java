@@ -29,7 +29,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.QuoteMode;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv167Test {
+ class JiraCsv167Test {
 
     private Reader getTestReader() {
         return new InputStreamReader(
@@ -37,7 +37,7 @@ public class JiraCsv167Test {
     }
 
     @Test
-    public void testParse() throws IOException {
+     void testParse() throws IOException {
         int totcomment = 0;
         int totrecs = 0;
         try (final Reader reader = getTestReader(); final BufferedReader br = new BufferedReader(reader)) {

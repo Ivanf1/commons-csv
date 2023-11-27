@@ -30,10 +30,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests [CSV-263] Print from Reader with embedded quotes generates incorrect output.
  */
-public class JiraCsv263Test {
+ class JiraCsv263Test {
 
     @Test
-    public void testPrintFromReaderWithQuotes() throws IOException {
+     void testPrintFromReaderWithQuotes() throws IOException {
         // @formatter:off
         final CSVFormat format = CSVFormat.RFC4180.builder()
             .setDelimiter(',')

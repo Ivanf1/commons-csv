@@ -27,12 +27,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TokenMatchersTest {
+ class TokenMatchersTest {
 
     private Token token;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         token = new Token();
         token.type = Token.Type.TOKEN;
         token.isReady = true;
@@ -40,13 +40,13 @@ public class TokenMatchersTest {
     }
 
     @Test
-    public void testHasContent() {
+     void testHasContent() {
         assertFalse(hasContent("This is not the token's content").matches(token));
         assertTrue(hasContent("content").matches(token));
     }
 
     @Test
-    public void testHasType() {
+     void testHasType() {
         assertFalse(hasType(Token.Type.COMMENT).matches(token));
         assertFalse(hasType(Token.Type.EOF).matches(token));
         assertFalse(hasType(Token.Type.EORECORD).matches(token));
@@ -54,14 +54,14 @@ public class TokenMatchersTest {
     }
 
     @Test
-    public void testIsReady() {
+     void testIsReady() {
         assertTrue(isReady().matches(token));
         token.isReady = false;
         assertFalse(isReady().matches(token));
     }
 
     @Test
-    public void testMatches() {
+     void testMatches() {
         assertTrue(matches(Token.Type.TOKEN, "content").matches(token));
         assertFalse(matches(Token.Type.EOF, "content").matches(token));
         assertFalse(matches(Token.Type.TOKEN, "not the content").matches(token));
@@ -69,7 +69,7 @@ public class TokenMatchersTest {
     }
 
     @Test
-    public void testToString() {
+     void testToString() {
         assertTrue(matches(Token.Type.TOKEN, "content").matches(token));
         assertEquals("TOKEN", token.type.name());
         assertEquals("TOKEN [content]", token.toString());

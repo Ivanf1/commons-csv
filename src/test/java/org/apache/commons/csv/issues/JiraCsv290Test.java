@@ -55,7 +55,7 @@ import org.junit.jupiter.api.Test;
 // 2    xyz    \\b:\b \\t:\t \\n:\n \\r:\r    a          b
 // 3    a      b,c,d                         "quoted"    e
 //
-public class JiraCsv290Test {
+ class JiraCsv290Test {
 
     private void testHelper(final String fileName, final CSVFormat format) throws Exception {
         List<List<String>> content = new ArrayList<>();
@@ -81,17 +81,17 @@ public class JiraCsv290Test {
     }
 
     @Test
-    public void testPostgresqlCsv() throws Exception {
+     void testPostgresqlCsv() throws Exception {
         testHelper("psql.csv", CSVFormat.POSTGRESQL_CSV);
     }
 
     @Test
-    public void testPostgresqlText() throws Exception {
+     void testPostgresqlText() throws Exception {
         testHelper("psql.tsv", CSVFormat.POSTGRESQL_TEXT);
     }
 
     @Test
-    public void testWriteThenRead() throws Exception {
+     void testWriteThenRead() throws Exception {
         final StringWriter sw = new StringWriter();
 
         try (CSVPrinter printer = new CSVPrinter(sw, CSVFormat.POSTGRESQL_CSV.builder().setHeader().setSkipHeaderRecord(true).build())) {

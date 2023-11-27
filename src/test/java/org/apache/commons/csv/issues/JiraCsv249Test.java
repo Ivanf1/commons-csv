@@ -30,10 +30,10 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv249Test {
+ class JiraCsv249Test {
 
     @Test
-    public void testJiraCsv249() throws IOException {
+     void testJiraCsv249() throws IOException {
         final CSVFormat csvFormat = CSVFormat.DEFAULT.builder().setEscape('\\').build();
         final StringWriter stringWriter = new StringWriter();
         try (CSVPrinter printer = new CSVPrinter(stringWriter, csvFormat)) {

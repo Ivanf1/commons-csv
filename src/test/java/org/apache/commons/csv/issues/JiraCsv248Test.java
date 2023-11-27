@@ -30,7 +30,7 @@ import java.io.ObjectInputStream;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv248Test {
+ class JiraCsv248Test {
     private static InputStream getTestInput() {
         return ClassLoader.getSystemClassLoader().getResourceAsStream("org/apache/commons/csv/CSV-248/csvRecord.bin");
     }
@@ -46,7 +46,7 @@ public class JiraCsv248Test {
      * @throws ClassNotFoundException If the CSVRecord cannot be deserialized
      */
     @Test
-    public void testJiraCsv248() throws IOException, ClassNotFoundException {
+     void testJiraCsv248() throws IOException, ClassNotFoundException {
         // Record was originally created using CSV version 1.6 with the following code:
         // try (final CSVParser parser = CSVParser.parse("A,B\n#my comment\nOne,Two",
         // CSVFormat.DEFAULT.builder().setHeader().setCommentMarker('#'))) {

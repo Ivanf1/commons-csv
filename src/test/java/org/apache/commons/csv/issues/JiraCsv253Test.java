@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Setting QuoteMode:ALL_NON_NULL or NON_NUMERIC can distinguish between empty string columns and absent value columns.
  */
-public class JiraCsv253Test {
+ class JiraCsv253Test {
 
     private void assertArrayEqual(final String[] expected, final CSVRecord actual) {
         for (int i = 0; i < expected.length; i++) {
@@ -40,7 +40,7 @@ public class JiraCsv253Test {
     }
 
     @Test
-    public void testHandleAbsentValues() throws IOException {
+     void testHandleAbsentValues() throws IOException {
         final String source = "\"John\",,\"Doe\"\n" + ",\"AA\",123\n" + "\"John\",90,\n" + "\"\",,90";
         final CSVFormat csvFormat = CSVFormat.DEFAULT.builder().setQuoteMode(QuoteMode.NON_NUMERIC).build();
         try (final CSVParser parser = csvFormat.parse(new StringReader(source))) {

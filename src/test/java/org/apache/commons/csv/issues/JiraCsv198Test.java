@@ -28,7 +28,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv198Test {
+ class JiraCsv198Test {
 
     // @formatter:off
     private static final CSVFormat CSV_FORMAT = CSVFormat.EXCEL.builder()
@@ -39,7 +39,7 @@ public class JiraCsv198Test {
     // @formatter:on
 
     @Test
-    public void test() throws UnsupportedEncodingException, IOException {
+     void test() throws UnsupportedEncodingException, IOException {
         final InputStream pointsOfReference = getClass().getResourceAsStream("/org/apache/commons/csv/CSV-198/optd_por_public.csv");
         assertNotNull(pointsOfReference);
         try (@SuppressWarnings("resource")

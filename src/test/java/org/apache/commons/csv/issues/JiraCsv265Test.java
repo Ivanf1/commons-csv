@@ -31,10 +31,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests [CSV-265] {@link CSVRecord#getCharacterPosition()} returns the correct position after encountering a comment.
  */
-public class JiraCsv265Test {
+ class JiraCsv265Test {
 
     @Test
-    public void testCharacterPositionWithComments() throws IOException {
+     void testCharacterPositionWithComments() throws IOException {
         // @formatter:off
         final String csv = "# Comment1\n"
                          + "Header1,Header2\n"
@@ -59,7 +59,7 @@ public class JiraCsv265Test {
     }
 
     @Test
-    public void testCharacterPositionWithCommentsSpanningMultipleLines() throws IOException {
+     void testCharacterPositionWithCommentsSpanningMultipleLines() throws IOException {
         // @formatter:off
         final String csv = "# Comment1\n"
                          + "# Comment2\n"

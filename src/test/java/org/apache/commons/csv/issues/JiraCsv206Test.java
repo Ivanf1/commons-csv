@@ -28,10 +28,10 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv206Test {
+ class JiraCsv206Test {
 
     @Test
-    public void testJiraCsv206MultipleCharacterDelimiter() throws IOException {
+     void testJiraCsv206MultipleCharacterDelimiter() throws IOException {
         // Read with multiple character delimiter
         final String source = "FirstName[|]LastName[|]Address\r\nJohn[|]Smith[|]123 Main St.";
         final StringReader reader = new StringReader(source);

@@ -27,12 +27,12 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 
-public class JiraCsv149Test {
+ class JiraCsv149Test {
 
     private static final String CR_LF = "\r\n";
 
     @Test
-    public void testJiraCsv149EndWithEOL() throws IOException {
+     void testJiraCsv149EndWithEOL() throws IOException {
         testJiraCsv149EndWithEolAtEof(true);
     }
 
@@ -59,7 +59,7 @@ public class JiraCsv149Test {
     }
 
     @Test
-    public void testJiraCsv149EndWithoutEOL() throws IOException {
+     void testJiraCsv149EndWithoutEOL() throws IOException {
         testJiraCsv149EndWithEolAtEof(false);
     }
 }
