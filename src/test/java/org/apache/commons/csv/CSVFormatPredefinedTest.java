@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link CSVFormat.Predefined}.
  */
-public class CSVFormatPredefinedTest {
+class CSVFormatPredefinedTest {
 
     private void test(final CSVFormat format, final String enumName) {
         assertEquals(format, CSVFormat.Predefined.valueOf(enumName).getFormat());
@@ -32,52 +32,52 @@ public class CSVFormatPredefinedTest {
     }
 
     @Test
-    public void testDefault() {
+    void testDefault() {
         test(CSVFormat.DEFAULT, "Default");
     }
 
     @Test
-    public void testExcel() {
+    void testExcel() {
         test(CSVFormat.EXCEL, "Excel");
     }
 
     @Test
-    public void testMongoDbCsv() {
+    void testMongoDbCsv() {
         test(CSVFormat.MONGODB_CSV, "MongoDBCsv");
     }
 
     @Test
-    public void testMongoDbTsv() {
+    void testMongoDbTsv() {
         test(CSVFormat.MONGODB_TSV, "MongoDBTsv");
     }
 
     @Test
-    public void testMySQL() {
+    void testMySQL() {
         test(CSVFormat.MYSQL, "MySQL");
     }
 
     @Test
-    public void testOracle() {
+    void testOracle() {
         test(CSVFormat.ORACLE, "Oracle");
     }
 
     @Test
-    public void testPostgreSqlCsv() {
+    void testPostgreSqlCsv() {
         test(CSVFormat.POSTGRESQL_CSV, "PostgreSQLCsv");
     }
 
     @Test
-    public void testPostgreSqlText() {
+    void testPostgreSqlText() {
         test(CSVFormat.POSTGRESQL_TEXT, "PostgreSQLText");
     }
 
     @Test
-    public void testRFC4180() {
+    void testRFC4180() {
         test(CSVFormat.RFC4180, "RFC4180");
     }
 
     @Test
-    public void testTDF() {
+    void testTDF() {
         test(CSVFormat.TDF, "TDF");
     }
 }
