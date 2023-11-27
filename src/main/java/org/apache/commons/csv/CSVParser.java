@@ -504,7 +504,9 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
             }
 
             // build the name to index mappings
-            headerNames = getHeaderNames(headerRecord, hdrMap, headerNames);
+            if (headerRecord != null) {
+                headerNames = getHeaderNames(headerRecord, hdrMap, headerNames);
+            }
         }
         if (headerNames == null) {
             headerNames = Collections.emptyList(); // immutable
@@ -515,36 +517,34 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
     }
 
     private List<String> getHeaderNames(String[] headerRecord, Map<String, Integer> hdrMap, List<String> headerNames) {
-        if (headerRecord != null) {
-            // Track an occurrence of a null, empty or blank header.
-            boolean observedMissing = false;
-            for (int i = 0; i < headerRecord.length; i++) {
-                final String header = headerRecord[i];
-                final boolean blankHeader = CSVFormat.isBlank(header);
-                if (blankHeader && !this.format.getAllowMissingColumnNames()) {
-                    throw new IllegalArgumentException(
-                        "A header name is missing in " + Arrays.toString(headerRecord));
-                }
+        // Track an occurrence of a null, empty or blank header.
+        boolean observedMissing = false;
+        for (int i = 0; i < headerRecord.length; i++) {
+            final String header = headerRecord[i];
+            final boolean blankHeader = CSVFormat.isBlank(header);
+            if (blankHeader && !this.format.getAllowMissingColumnNames()) {
+                throw new IllegalArgumentException(
+                    "A header name is missing in " + Arrays.toString(headerRecord));
+            }
 
-                final boolean containsHeader = blankHeader ? observedMissing : hdrMap.containsKey(header);
-                final DuplicateHeaderMode headerMode = this.format.getDuplicateHeaderMode();
-                final boolean duplicatesAllowed = headerMode == DuplicateHeaderMode.ALLOW_ALL;
-                final boolean emptyDuplicatesAllowed = headerMode == DuplicateHeaderMode.ALLOW_EMPTY;
+            final boolean containsHeader = blankHeader ? observedMissing : hdrMap.containsKey(header);
+            final DuplicateHeaderMode headerMode = this.format.getDuplicateHeaderMode();
+            final boolean duplicatesAllowed = headerMode == DuplicateHeaderMode.ALLOW_ALL;
+            final boolean emptyDuplicatesAllowed = headerMode == DuplicateHeaderMode.ALLOW_EMPTY;
 
-                if (containsHeader && !duplicatesAllowed && !(blankHeader && emptyDuplicatesAllowed)) {
-                    throw new IllegalArgumentException(
-                        String.format(
-                            "The header contains a duplicate name: \"%s\" in %s. If this is valid then use CSVFormat.Builder.setDuplicateHeaderMode().",
-                            header, Arrays.toString(headerRecord)));
+            if (containsHeader && !duplicatesAllowed && !(blankHeader && emptyDuplicatesAllowed)) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "The header contains a duplicate name: \"%s\" in %s. If this is valid then use CSVFormat.Builder.setDuplicateHeaderMode().",
+                        header, Arrays.toString(headerRecord)));
+            }
+            observedMissing |= blankHeader;
+            if (header != null) {
+                hdrMap.put(header, Integer.valueOf(i));
+                if (headerNames == null) {
+                    headerNames = new ArrayList<>(headerRecord.length);
                 }
-                observedMissing |= blankHeader;
-                if (header != null) {
-                    hdrMap.put(header, Integer.valueOf(i));
-                    if (headerNames == null) {
-                        headerNames = new ArrayList<>(headerRecord.length);
-                    }
-                    headerNames.add(header);
-                }
+                headerNames.add(header);
             }
         }
         return headerNames;
