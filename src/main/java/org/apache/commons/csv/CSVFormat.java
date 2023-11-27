@@ -2333,7 +2333,7 @@ public final class CSVFormat implements Serializable {
         // the need for encapsulation.
         while (pos < len) {
             final char c = charSeq.charAt(pos);
-            if (c == quoteChar || c == escapeChar) {
+            if (isQuoteCharOrEscapeChar(c, quoteChar, escapeChar)) {
                 // write out the chunk up until this point
                 out.append(charSeq, start, pos);
                 out.append(escapeChar); // now output the escape
@@ -2349,6 +2349,11 @@ public final class CSVFormat implements Serializable {
 
     private static boolean isLFCRQuoteCharOrEscapeChar(char c, char quoteChar, char escapeChar) {
         return c == LF || c == CR || c == quoteChar || c == escapeChar;
+    }
+
+    private static boolean isQuoteCharOrEscapeChar(char c, char quoteChar, char escapeChar) {
+        return c == quoteChar || c == escapeChar;
+
     }
 
     /**
