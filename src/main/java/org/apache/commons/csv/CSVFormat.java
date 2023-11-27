@@ -2291,7 +2291,7 @@ public final class CSVFormat implements Serializable {
                 } else {
                     while (pos < len) {
                         c = charSeq.charAt(pos);
-                        if (c == LF || c == CR || c == quoteChar || c == escapeChar || isDelimiter(c, charSeq, pos, delim, delimLength)) {
+                        if (isLFCRQuoteCharOrEscapeChar(c, quoteChar, escapeChar) || isDelimiter(c, charSeq, pos, delim, delimLength)) {
                             quote = true;
                             break;
                         }
@@ -2345,6 +2345,10 @@ public final class CSVFormat implements Serializable {
         // Write the last segment
         out.append(charSeq, start, pos);
         out.append(quoteChar);
+    }
+
+    private static boolean isLFCRQuoteCharOrEscapeChar(char c, char quoteChar, char escapeChar) {
+        return c == LF || c == CR || c == quoteChar || c == escapeChar;
     }
 
     /**
