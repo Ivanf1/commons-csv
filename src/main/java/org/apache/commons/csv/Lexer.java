@@ -268,10 +268,16 @@ final class Lexer implements Closeable {
         }
 
         // Important: make sure a new char gets consumed in each iteration
+        consumeTokenWhileInvalid(token, c, eol);
+
+        return token;
+    }
+
+    private void consumeTokenWhileInvalid(Token token, int c, boolean eol) throws IOException {
         while (token.type == INVALID) {
             // ignore whitespaces at beginning of a token
             if (ignoreSurroundingSpaces) {
-                while (Character.isWhitespace((char)c) && !isDelimiter(c) && !eol) {
+                while (Character.isWhitespace((char) c) && !isDelimiter(c) && !eol) {
                     c = reader.read();
                     eol = readEndOfLine(c);
                 }
@@ -299,7 +305,6 @@ final class Lexer implements Closeable {
                 parseSimpleToken(token, c);
             }
         }
-        return token;
     }
 
     /**
