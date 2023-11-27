@@ -32,7 +32,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  * Tests parsing of duplicate column names in a CSV header.
  * The test verifies that headers are consistently handled by CSVFormat and CSVParser.
  */
-public class CSVDuplicateHeaderTest {
+class CSVDuplicateHeaderTest {
 
     /**
      * Return test cases for duplicate header data for use in CSVFormat.
@@ -270,7 +270,7 @@ public class CSVDuplicateHeaderTest {
      */
     @ParameterizedTest
     @MethodSource(value = {"duplicateHeaderAllowsMissingColumnsNamesData"})
-    public void testCSVFormat(final DuplicateHeaderMode duplicateHeaderMode,
+    void testCSVFormat(final DuplicateHeaderMode duplicateHeaderMode,
                               final boolean allowMissingColumnNames,
                               final boolean ignoreHeaderCase,
                               final String[] headers,
@@ -303,7 +303,7 @@ public class CSVDuplicateHeaderTest {
      */
     @ParameterizedTest
     @MethodSource(value = {"duplicateHeaderData"})
-    public void testCSVParser(final DuplicateHeaderMode duplicateHeaderMode,
+    void testCSVParser(final DuplicateHeaderMode duplicateHeaderMode,
                               final boolean allowMissingColumnNames,
                               final boolean ignoreHeaderCase,
                               final String[] headers,
